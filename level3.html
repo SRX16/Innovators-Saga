@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovators Saga - Java Debugging Game: Level 3</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="1.jpg"/>
+    <script>
+        let currentQuestion = 0;
+
+        const questions = [
+            {
+                code: `public class Level3 {
+    public static void main(String[] args) {
+        int i = 0;
+        while (i < 5) {
+            System.out.println("Trapped in the Loop of Doom!");
+            // Missing increment statement
+        }
+        System.out.println("You escaped!");
+    }
+}`,
+                answerRegex: /while\s*\(\s*i\s*<\s*5\s*\)\s*\{/
+            },
+            {
+                code: `public class Level3 {
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Looping!");
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Looping!"\s*\)\s*;/
+            },
+            {
+                code: `public class Level3 {
+    public static void main(String[] args) {
+        int i = 0;
+        do {
+            System.out.println("This will run at least once!");
+            i++;
+        } while (i < 5);
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"This will run at least once!"\s*\)\s*;/
+            },
+            {
+                code: `public class Level3 {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i += 2) {
+            System.out.println("Counting by twos: " + i);
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Counting by twos: "\s*\+\s*i\s*\)\s*;/
+            },
+            {
+                code: `public class Level3 {
+    public static void main(String[] args) {
+        int i = 0;
+        while (i < 5) {
+            System.out.println("Count: " + i);
+            i++;
+        }
+        System.out.println("Finished counting!");
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Finished counting!"\s*\)\s*;/
+            }
+        ];
+
+        function loadQuestion() {
+            document.getElementById('codeBox').innerText = questions[currentQuestion].code;
+            document.getElementById('userCode').value = '';
+            document.getElementById('congratulations').style.display = 'none';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userCode').value.trim();
+            if (questions[currentQuestion].answerRegex.test(userAnswer)) {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById('congratulations').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'congrats.html'; // Redirect to final page (e.g. congratulations)
+                    }, 2000);
+                }
+            } else {
+                alert('Incorrect Code, Try again!!');
+            }
+        }
+
+        window.onload = loadQuestion; // Load the first question on page load
+    </script>
+</head>
+<body>
+    <h1>🛡️ Innovators Saga: Java Debugging Challenge - Level 3</h1>
+
+    <div class="level">
+        <h2>⚔️ Level 3: The Loop of Doom</h2>
+        <p><strong>Challenge:</strong> Fix the following Java code.</p>
+        <div class="code-box" id="codeBox"></div>
+
+        <div id="congratulations" class="congratulations" style="display:none;">
+            <h3>🎉 Congratulations, you solved the challenge!</h3>
+            <p>Well done! You've completed the Innovators Saga!</p>
+        </div>
+
+        <textarea id="userCode" placeholder="Type your fixed Java code here..."></textarea>
+        <button onclick="checkAnswer()" class                                                                                          <button onclick="checkAnswer()" class="play-button">Check Answer</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovators Saga - Java Debugging Game: Level 2</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="1.jpg"/>
+    <script>
+        let currentQuestion = 0;
+
+        const questions = [
+            {
+                code: `public class Level2 {
+    public static void main(String[] args) {
+        int key = 5;
+        if (key = 5) { // ❌ERROR: Use comparison, not assignment
+            System.out.println("The gate opens!");
+        } else {
+            System.out.println("Access Denied!");
+        }
+    }
+}`,
+                answerRegex: /if\s*\(\s*key\s*==\s*5\s*\)\s*\{/
+            },
+            {
+                code: `public class Level2 {
+    public static void main(String[] args) {
+        int key = 3;
+        if (key == 5) {
+            System.out.println("The gate opens!");
+        } else {
+            System.out.println("Access Denied!");
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Access Denied!"\s*\)\s*;/
+            },
+            {
+                code: `public class Level2 {
+    public static void main(String[] args) {
+        int key = 5;
+        if (key == 5) {
+            System.out.println("The gate opens!");
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"The gate opens!"\s*\)\s*;/
+            },
+            {
+                code: `public class Level2 {
+    public static void main(String[] args) {
+        int key = 10;
+        if (key > 5) {
+            System.out.println("Key is greater than 5");
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Key is greater than 5"\s*\)\s*;/
+            },
+            {
+                code: `public class Level2 {
+    public static void main(String[] args) {
+        int key = 5;
+        if (key < 5) {
+            System.out.println("Key is less than 5");
+        } else {
+            System.out.println("Key is 5 or more");
+        }
+    }
+}`,
+                answerRegex: /System\.out\.println\s*\(\s*"Key is 5 or more"\s*\)\s*;/
+            }
+        ];
+
+        function loadQuestion() {
+            document.getElementById('codeBox').innerText = questions[currentQuestion].code;
+            document.getElementById('userCode').value = '';
+            document.getElementById('congratulations').style.display = 'none';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userCode').value.trim();
+            if (questions[currentQuestion].answerRegex.test(userAnswer)) {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById('congratulations').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'level3.html'; // Proceed to Level 3
+                    }, 2000);
+                }
+            } else {
+                alert('Incorrect Code, Try again!!');
+            }
+        }
+
+        window.onload = loadQuestion; // Load the first question on page load
+    </script>
+</head>
+<body>
+    <h1>🛡️ Innovators Saga: Java Debugging Challenge - Level 2</h1>
+
+    <div class="level">
+        <h2>⚔️ Level 2: The Tricky If-Else Statement</h2>
+        <p><strong>Challenge:</strong> Fix the following Java code.</p>
+        <div class="code-box" id="codeBox"></div>
+
+        <div id="congratulations" class="congratulations" style="display:none;">
+            <h3>🎉 Congratulations, you solved the challenge!</h3>
+            <p>Well done! You can now proceed to the next level.</p>
+        </div>
+
+        <textarea id="userCode" placeholder="Type your fixed Java code here..."></textarea>
+        <button onclick="checkAnswer()" class="play-button">Check Answer</button>
+    </div>
+</body>
+</html>

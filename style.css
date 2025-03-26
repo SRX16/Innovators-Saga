@@ -1,0 +1,150 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: linear-gradient(-135deg, #6a82fb, #fc5c7d); 
+  padding: 20px;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Allow scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 0;
+}
+
+/* Headings */
+h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Level Section */
+.level {
+  background: rgba(10, 10, 10, 0.7); /* Dark background for contrast */
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 600px; /* Ensuring consistency */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  margin: 20px auto;
+}
+
+/* Code Box */
+.code-box {
+  background: rgba(255, 255, 255, 0.1); /* Light background for code */
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  white-space: pre-wrap; /* Ensure long code lines wrap */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 96%;
+  margin: 15px auto;
+  font-size: 1rem; /* Adjusted for better readability */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Textarea for User Input */
+textarea {
+  width: 96%;
+  height: 150px;
+  margin-top: 12px;
+  font-family: 'Fira Code', monospace;
+  display: block;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px;
+  border-radius: 8px;
+  transition: border 0.3s ease-in-out;
+  font-size: 1rem;
+  color: #1f1a1a;
+}
+
+textarea:focus {
+  border-color: #12d9f3;
+  outline: none;
+}
+
+/* Play Button Styles */
+.play-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+/* Hover effect */
+.play-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* Active effect */
+.play-button:active {
+  transform: scale(1);
+}
+
+/* Congratulations Message Styling */
+.congratulations {
+  background: rgba(46, 204, 112, 0.2);
+  color: #2cd673;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  margin-top: 25px;
+  font-weight: 500;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.congratulations h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  body {
+      padding: 10px; /* Reduced padding for mobile */
+  }
+
+     .level, .code-box {
+      width: 100%; /* Full width for mobile */
+      padding: 15px;
+  }
+
+  h1 {
+      font-size: 1.8rem; /* Adjust heading size for mobile */
+  }
+
+  textarea {
+      width: 100%; /* Full width on mobile */
+      height: 140px;
+      font-size: 1rem; /* Adjust textarea font size */
+  }
+
+  .play-button {
+      padding: 10px 15px;
+      font-size: 1rem; /* Smaller button on mobile */
+  }
+
+  .congratulations {
+      font-size: 1rem;
+      padding: 12px;
+  }
+}
